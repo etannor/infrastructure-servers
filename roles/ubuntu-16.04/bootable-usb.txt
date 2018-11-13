@@ -1,0 +1,44 @@
+1. Create working directory
+   cd ~ && mkdir ubuntu-image 
+   cd ubuntu-image 
+
+2. Download ISO image from http://www.ubuntu.com/download
+   curl -k http://old-releases.ubuntu.com/releases/16.04.4/ubuntu-16.04-server-amd64.img --output ubuntu-16.04-server-amd64.img
+   ls
+   ubuntu-16.04-server-amd64.img
+
+3. Unmount the flash drive 
+   $ diskutil list
+  /dev/disk0 (internal):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                         1.0 TB     disk0
+   1:                        EFI EFI                     314.6 MB   disk0s1
+   2:                 Apple_APFS Container disk1         1.0 TB     disk0s2
+
+  /dev/disk1 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +1.0 TB     disk1
+                                 Physical Store disk0s2
+   1:                APFS Volume XXX                    105.0 GB   disk1s1
+   2:                APFS Volume Preboot                 19.7 MB    disk1s2
+   3:                APFS Volume Recovery                509.8 MB   disk1s3
+   4:                APFS Volume VM                      6.4 GB     disk1s4
+
+  /dev/disk2 (external, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *4.0 GB     disk2
+   1:                        EFI EFI                     209.7 MB   disk2s1
+   2:                  Apple_HFS smith                 3.7 GB     disk2s2
+
+ diskutil unmount /dev/disk2
+ disk2 was already unmounted or it has a partitioning scheme so use "diskutil unmountDisk" instead
+ diskutil unmountDisk /dev/disk2
+ Unmount of all volumes on disk2 was successful
+
+4. Copy the contents of the image to the flash drive 
+   sudo dd if=ubuntu-16.04-server-amd64.img of=/dev/disk2 bs=1m
+Password:
+655+0 records in
+655+0 records out
+686817280 bytes transferred in 1086.105438 secs (632367 bytes/sec)
+Eject disk o
