@@ -7,6 +7,20 @@
    ls
    ubuntu-16.04-server-amd64.img
 
+4. If you downloaded an iso file, convert it to an .img file
+   njwamacl257:ubuntu-image nkansen$ hdiutil convert -format UDRW -o ubuntu-16.04.5-desktop-amd64.img ubuntu-16.04.5-desktop-amd64.iso
+Reading Driver Descriptor Map (DDM : 0)…
+Reading Ubuntu 16.04.5 LTS amd64         (Apple_ISO : 1)…
+Reading Apple (Apple_partition_map : 2)…
+Reading Ubuntu 16.04.5 LTS amd64         (Apple_ISO : 3)…
+Reading EFI (Apple_HFS : 4)…
+Reading Ubuntu 16.04.5 LTS amd64         (Apple_ISO : 5)…
+...................................................................................................................................
+Elapsed Time:  3.692s
+Speed: 426.1Mbytes/sec
+Savings: 0.0%
+
+
 3. Unmount the flash drive 
    $ diskutil list
   /dev/disk0 (internal):
@@ -30,8 +44,7 @@
    1:                        EFI EFI                     209.7 MB   disk2s1
    2:                  Apple_HFS smith                 3.7 GB     disk2s2
 
- diskutil unmount /dev/disk2
- disk2 was already unmounted or it has a partitioning scheme so use "diskutil unmountDisk" instead
+
  diskutil unmountDisk /dev/disk2
  Unmount of all volumes on disk2 was successful
 
